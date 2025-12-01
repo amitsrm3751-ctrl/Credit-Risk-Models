@@ -3,6 +3,94 @@
 An end-to-end credit risk analytics project using Python, IFRS-9 ECL, and real-world banking workflows.
 
 ---
+### 📂 What This Repository Contains
+This repository showcases a complete Credit Risk Modelling pipeline, including:
+- Data cleaning, preprocessing, and EDA
+- PD (Probability of Default) modelling using Logistic Regression
+- IFRS-9 Expected Credit Loss (ECL) framework implementation
+- Documentation (BRD, FSD, User Stories)
+- Agile workflow tracked through Jira
+
+## 📊 Exploratory Data Analysis (EDA) Summary
+
+The Exploratory Data Analysis phase focused on understanding borrower behavior, identifying risk patterns, validating data quality, and uncovering predictive relationships relevant to credit default (SeriousDlqin2yrs).
+
+### 🔍 Key Insights
+
+#### 1. Applicant Demographics
+- **Age distribution is right-skewed**, with most borrowers between **30–60 years**.
+- Very few borrowers are below 25 or above 75, reducing noise for age-based risk segmentation.
+
+#### 2. Revolving Utilization (Credit Card Usage)
+- Highly skewed with extreme outliers (values > 1.0).
+- **Defaulters tend to show higher utilization**, indicating risk from maxed-out credit lines.
+
+#### 3. Debt-to-Income Ratio (DTI)
+- Extremely wide range with large outliers.
+- Defaulters consistently exhibit **higher median DebtRatio**.
+
+#### 4. Monthly Income
+- Distribution is right-skewed with income outliers above ₹20 lakh (dataset equivalent).
+- Default rates do **not decrease proportionally** with higher income — suggesting income alone is not a strong predictor.
+
+---
+
+### 🧱 Delinquency Pattern Analysis (Most Important EDA Insight)
+
+We analyzed three delinquency buckets:
+
+| Bucket | Meaning | Behavior |
+|--------|---------|----------|
+| **DPD 30–59** | Mild delinquency | Early warning indicator |
+| **DPD 60–89** | Medium delinquency | Strong signal of financial stress |
+| **DPD 90+** | Default proxy | Strongest predictor of SeriousDlqin2yrs |
+
+#### 🔥 Findings
+- All three delinquency variables are **skewed with most customers having 0 delinquency**.
+- Strong positive correlations:
+  - **DPD 60–89 ↔ DPD 90+** (0.66)
+  - **DPD 30–59 ↔ DPD 60–89** (0.56)
+- Customers with repeated 30–59 day delinquencies often progress to 60–89 and then 90+ status.
+
+#### IFRS-9 Interpretation
+- **Performing Loans (Stage 1):** No delinquencies → 12-month ECL  
+- **SICR (Stage 2):** Repeated 30–59 or 60–89 delinquencies → Lifetime ECL  
+- **Default (Stage 3):** 90+ DPD → Lifetime ECL + interest reversal  
+
+These delinquency patterns directly support IFRS-9 staging logic in later modeling steps.
+
+---
+
+### 🗂️ Outlier & Correlation Analysis
+- Outliers present in **Revolving Utilization**, **DebtRatio**, and **MonthlyIncome**.
+- Correlation heatmap confirms:
+  - Delinquency buckets are strong predictors of default.
+  - Other features show weak to moderate correlations.
+
+---
+
+### ✅ EDA Outcome
+The dataset is:
+- Cleaned  
+- Validated  
+- Understood statistically  
+- Ready for **Feature Engineering** and **PD Model Development**
+
+---
+### 🔗 Quick Navigation
+- [EDA Summary](#-exploratory-data-analysis-eda-summary)
+- [Project Overview](#1-project-overview)
+- [Tech Stack](#2-tech-stack)
+- [Project Structure](#3-project-structure)
+- [Documentation](#4-documentation)
+- [Agile Workflow](#5-agile-workflow-enhanced-jira-section)
+- [Modelling Steps](#6-modelling-steps)
+- [Future Enhancements](#7-future-enhancements)
+- [About the Author](#8-about-the-author)
+- [Target Roles](#9-target-roles)
+- [Project Status](#10-project-status)
+
+
 
 📌 1. Project Overview
 
@@ -33,13 +121,15 @@ The goal is to build a transparent, auditable, and end-to-end risk analytics fra
 
 ---
 
-📂 3. Project Structure
+📂 **3. Project Structure**
 
-Credit-Risk-Models/
+credit-risk-models/
 │
 ├── data/
-│ ├── raw/ # Original dataset (from Kaggle)
-│ └── processed/ # Cleaned/transformed data for modelling
+│ ├── raw/
+│ └── processed/
+│ ├── credit_data_cleaned.csv
+│ └── credit_data_cleaned_final.csv
 │
 ├── notebooks/
 │ ├── 01_data_cleaning.ipynb
@@ -245,6 +335,7 @@ Senior Manager – Credit Risk • Business Analyst • IFRS-9 ECL • Portfolio
 
 📌 10. Project Status
 
-**Status:** In Progress  
-**Next Milestone:** Complete EDA and begin baseline PD modelling.
+> 📝 **Status:** EDA Completed | PD Model Development In Progress  
+> 📅 Last Updated: December 2025  
+
 
