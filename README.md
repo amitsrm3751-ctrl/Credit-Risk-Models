@@ -120,39 +120,38 @@ The goal is to build a transparent, auditable, and end-to-end risk analytics fra
 - GitHub (Version control & documentation)
 
 ---
+## 📁 Project Structure
 
-📂 **3. Project Structure**
-
+```plaintext
 credit-risk-models/
 │
-├── data/
-│ ├── raw/
-│ └── processed/
-│ ├── credit_data_cleaned.csv
-│ └── credit_data_cleaned_final.csv
+│── data/
+│   ├── raw/
+│   ├── processed/
+│   ├── credit_data_cleaned.csv
+│   └── credit_data_cleaned_final.csv
 │
-├── notebooks/
-│ ├── 01_data_cleaning.ipynb
-│ ├── 02_eda.ipynb
-│ ├── 03_pd_model.ipynb
-│ └── 04_ecl_calculation.ipynb
+│── notebooks/
+│   ├── 01_data_cleaning.ipynb
+│   ├── 02_eda.ipynb
+│   ├── 03_pd_model.ipynb
+│   └── 04_ecl_calculation.ipynb
 │
-├── docs/
-│ ├── User_Stories.md
-│ ├── BRD.md
-│ └── FSD.md
+│── docs/
+│   ├── User_Stories.md
+│   ├── BRD.md
+│   └── FSD.md
 │
-├── jira_screenshots/
-│ ├── jira_board_progress_1.png
-│ ├── Jira_Board_Progress_2.png
+│── jira_screenshots/
+│   ├── jira_board_progress_1.png
+│   └── jira_board_progress_2.png
 │
-├── ifrs9_ecl/
-├── pd_model/
-├── lgd_ead_models/
+│── ifrs9_ecl/
+│   └── pd_model/
+│       └── lgd_ead_models/
+│
 └── README.md
-
----
-
+```
 📜 4. Documentation
 
 🔹 **User Stories**  
