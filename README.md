@@ -313,11 +313,55 @@ Actual Jira board screenshots from this project:
 - Streamlit model deployment  
 
 ---
+## 📐 Feature Engineering & WOE Transformation (Completed)
+
+This project follows a **regulated credit risk modelling workflow** consistent with
+banking and IFRS-9 practices.
+
+All feature engineering was completed **before model estimation**, with strict
+controls to avoid data leakage.
+
+### Key Principles Followed
+
+- Train–test split performed **before** binning
+- WOE and IV calculated using **training data only**
+- Identical bin mappings applied to test data
+- Variables assessed for:
+  - Predictive power (Information Value)
+  - Monotonic risk behavior
+  - Stability and interpretability
+
+### Variables Engineered & Evaluated
+
+| Variable | Treatment | Decision |
+|--------|----------|---------|
+| age | Quantile WOE binning | ✅ Kept |
+| NumberOfTime30–59DaysPastDueNotWorse | Business-driven bins | ✅ Kept |
+| NumberOfTime60–89DaysPastDueNotWorse | Business-driven bins | ✅ Kept |
+| MonthlyIncome | Quantile WOE binning | ✅ Kept |
+| RevolvingUtilizationOfUnsecuredLines | Multiple binning attempts | ❌ Dropped (instability) |
+| DebtRatio | Coarse binning | ❌ Dropped (weak IV) |
+
+### Information Value Summary (Indicative)
+
+- Delinquency variables show **strong IV**, consistent with behavioral risk drivers
+- Income shows **weak but intuitive IV**
+- Over-dominant or unstable variables were excluded
+
+### Model-Ready Outputs
+
+WOE-transformed datasets exported for modelling:
+
+- `data/processed/pd_model_train_woe.csv`
+- `data/processed/pd_model_test_woe.csv`
+
+These datasets are used directly for PD model estimation and validation.
+
 
 👤 8. About the Author
 
 **Amitabh Gogoi**  
-Senior Manager – Credit Risk • Business Analyst • IFRS-9 ECL • Portfolio Analytics  
+Senior Manager – Credit Risk • Business Analyst • IFRS-9 ECL • Portfolio Analytics  • Credit Analyst
 11+ years of professional experience in banking risk.
 
 ---
@@ -334,7 +378,8 @@ Senior Manager – Credit Risk • Business Analyst • IFRS-9 ECL • Portfolio
 
 📌 10. Project Status
 
-> 📝 **Status:** EDA Completed | PD Model Development In Progress  
-> 📅 Last Updated: December 2025  
+> 📝 **Status:** EDA Completed | PD Model Development In Progress
+
+> 📅 Last Updated: January 2026 
 
 
