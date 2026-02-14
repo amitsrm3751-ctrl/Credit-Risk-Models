@@ -140,8 +140,8 @@ credit-risk-models/
 ## 👤 About the Author
 
 **Amitabh Gogoi**  
-Senior Manager – Credit Risk & IFRS-9 Analytics  
-11+ years of experience in retail banking risk, modelling, and portfolio analytics.
+Manager – Credit Risk  
+11+ years of experience in retail banking credit analysis risk and portfolio analytics.
 
 ---
 
