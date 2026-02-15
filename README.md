@@ -150,11 +150,9 @@ ECL = PD × LGD × EAD
 - Jupyter Notebook
 - Jira (Scrum tracking)
 - GitHub (Version control & documentation)
-
----
 ## 📁 Project Structure
 
-```
+```plaintext
 Credit-Risk-Models/
 │
 ├── data/
@@ -175,7 +173,6 @@ Credit-Risk-Models/
 ├── User_Stories.md
 └── README.md
 ```
-
 
 # 🧭 Agile Workflow (Jira)
 
