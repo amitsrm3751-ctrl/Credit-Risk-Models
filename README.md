@@ -1,152 +1,223 @@
 # 📘 Credit Risk Modelling & Scorecard Project
 
-An end-to-end retail credit risk modelling project built using real-world banking methodology, including WOE transformation, PD modelling, statistical validation, and credit scorecard development aligned with IFRS-9 principles.
+An end-to-end Probability of Default (PD) modelling and monitoring project built using Python and structured risk governance practices.
+
+This repository demonstrates a realistic banking-style credit risk workflow including feature engineering, model validation, scorecard logic, and model monitoring using PSI.
 
 ---
 
-## 📌 Project Overview
+# 🎯 Project Objective
 
-This project demonstrates the complete lifecycle of a retail Probability of Default (PD) model used in banks and NBFCs:
+To build a transparent, interpretable, and governance-ready PD model using structured risk modelling practices consistent with regulated banking environments.
+
+This project focuses on:
 
 - Data cleaning & preprocessing  
 - Exploratory Data Analysis (EDA)  
-- WOE (Weight of Evidence) transformation  
-- Information Value (IV) validation  
-- Logistic Regression (scikit-learn & statsmodels)  
-- Model evaluation (AUC, KS, Gini)  
-- Credit Scorecard creation  
-- Risk band segmentation  
-- IFRS-9 ECL framework integration (PD × LGD × EAD)
-
-The objective is to build a transparent, interpretable, regulator-aligned credit risk model consistent with real-world scorecard practices.
+- Feature engineering with WOE & IV  
+- Logistic Regression PD modelling  
+- Model validation (AUC, KS, Gini, Confusion Matrix)  
+- Population Stability Index (PSI) for monitoring  
+- IFRS-9 staging logic (conceptual demonstration)  
+- Agile project tracking using Jira  
 
 ---
 
-## 🧱 Modelling Workflow
+# ⚠️ Scope Clarification
 
-### 1️⃣ Data Preparation
-- Missing value treatment  
-- Outlier handling  
-- Feature validation  
-- Train–test split (performed before binning to avoid leakage)
+This dataset does **not** contain recovery or exposure-level information required for robust LGD and EAD modelling.
 
-### 2️⃣ WOE & IV Transformation
-- Quantile and business-driven binning  
-- WOE calculated using training data only  
-- IV used for variable selection  
-- Monotonic risk behavior validation  
-- Identical bin mapping applied to test data  
+Accordingly:
 
-### 3️⃣ PD Model Development
-- Logistic Regression using WOE-transformed features  
-- Statistical inference using **statsmodels** (p-values, coefficients)  
-- Feature significance validation  
+- This project delivers a complete **PD modelling lifecycle**
+- LGD and EAD modelling are formally deferred to a future project using suitable recovery/exposure datasets
 
-### 4️⃣ Model Evaluation (Out-of-Sample Test Set)
-
-| Metric | Result |
-|--------|--------|
-| AUC | ~0.80 |
-| Gini | ~0.60 |
-| KS | ~0.44 |
-
-The model demonstrates strong discriminatory power and stable separation between good and bad borrowers.
-
-### 5️⃣ Credit Scorecard Implementation
-- Log-odds converted to score using linear scaling  
-- Score range approx. **550–725**  
-- Higher score → Lower probability of default  
-- Monotonic risk ranking validated  
-
-#### 📊 Business Risk Segmentation (Fixed Cut-offs)
-
-| Risk Band | Approx. Default Rate |
-|------------|----------------------|
-| Very High Risk | ~51% |
-| High Risk | ~27% |
-| Medium Risk | ~6% |
-| Low Risk | ~1% |
-
-Default rates decrease consistently as score increases, confirming correct calibration.
+This reflects proper model governance and dataset suitability review.
 
 ---
 
-## 📁 Project Structure
+# 📊 Exploratory Data Analysis (EDA) Summary
 
-```
-credit-risk-models/
+The EDA phase focused on identifying behavioral risk indicators and validating statistical integrity before modelling.
+
+## 🔍 Key Observations
+
+### 1️⃣ Borrower Age
+- Right-skewed distribution
+- Majority between 30–60 years
+- Limited noise from extreme age bands
+
+### 2️⃣ Revolving Utilization
+- Highly skewed
+- Strong relationship with default
+- Outliers present
+
+### 3️⃣ Debt Ratio
+- Wide distribution
+- Defaulters show higher median DTI
+
+### 4️⃣ Delinquency Buckets (Most Predictive)
+
+| Bucket | Interpretation |
+|--------|----------------|
+| 30–59 DPD | Early stress signal |
+| 60–89 DPD | Escalating financial distress |
+| 90+ DPD | Strong default proxy |
+
+Strong correlations exist between delinquency stages, reflecting behavioral progression risk.
+
+---
+
+# 🧱 Feature Engineering & WOE Transformation
+
+The modelling workflow follows regulated credit risk practices.
+
+## Controls Implemented
+
+- Train–test split performed before binning
+- WOE & IV calculated using training data only
+- Identical bin mappings applied to test data
+- Monotonic risk behavior validated
+
+## Variables Retained
+
+| Variable | Treatment | Decision |
+|-----------|-----------|----------|
+| Age | Quantile WOE binning | ✅ Kept |
+| 30–59 DPD | Business bins | ✅ Kept |
+| 60–89 DPD | Business bins | ✅ Kept |
+| Monthly Income | Quantile bins | ✅ Kept |
+
+Variables showing instability or weak predictive strength were excluded.
+
+---
+
+# 📈 PD Model Development
+
+## Model Type
+- Logistic Regression
+
+## Training Approach
+- WOE-transformed features
+- No data leakage
+- Proper train-test separation
+
+## Evaluation Metrics
+
+- ROC-AUC
+- KS Statistic
+- Gini Coefficient
+- Confusion Matrix
+- Threshold tuning
+
+The model demonstrates strong discriminatory power while maintaining interpretability.
+
+---
+
+# 📊 Model Monitoring — Population Stability Index (PSI)
+
+To ensure model robustness over time, PSI was implemented.
+
+## PSI Measures:
+
+- Distribution shift between training and new population
+- Score-level monitoring
+- Drift interpretation thresholds
+
+This step reflects real-world model governance and post-deployment validation.
+
+---
+
+# 🏦 IFRS-9 Staging Logic (Conceptual Demonstration)
+
+The project demonstrates IFRS-9 staging logic using PD outputs:
+
+- Stage 1 → Performing (12-month PD)
+- Stage 2 → Significant Increase in Credit Risk
+- Stage 3 → Default (90+ DPD proxy)
+
+ECL formula illustrated:
+
+ECL = PD × LGD × EAD
+
+(Note: LGD and EAD modelling require separate recovery/exposure dataset and are scoped for future project.)
+
+---
+
+# ⚙️ Tech Stack
+
+- Python (pandas, numpy, scikit-learn, matplotlib)
+- Jupyter Notebook
+- Jira (Scrum tracking)
+- GitHub (Version control & documentation)
+
+---
+
+# 📁 Project Structure
+
+Credit-Risk-Models/
 │
 ├── data/
 │   ├── raw/
-│   └── processed/
-│       ├── pd_model_train_woe.csv
-│       └── pd_model_test_woe.csv
+│   ├── processed/
 │
 ├── notebooks/
 │   ├── 01_data_cleaning.ipynb
 │   ├── 02_eda.ipynb
 │   ├── 03_woe_binning.ipynb
 │   ├── 04_pd_model_logistic.ipynb
-│   └── 05_scorecard.ipynb
+│   ├── 05_psi_monitoring.ipynb
 │
-├── docs/
-│   ├── BRD.md
-│   ├── FSD.md
-│   └── User_Stories.md
+├── jira_screenshots/
 │
+├── BRD.md
+├── FSD.md
+├── User_Stories.md
 └── README.md
-```
 
 ---
 
-## ⚙️ Tech Stack
+# 🧭 Agile Workflow (Jira)
 
-- Python (pandas, numpy)
-- scikit-learn
-- statsmodels
-- matplotlib
-- Jupyter Notebook
-- IFRS-9 Framework (PD × LGD × EAD)
-- GitHub
-- Jira (Agile tracking)
+The project was tracked using a structured Scrum-style workflow:
 
----
+- Epics aligned with modelling phases
+- User stories tied to credit risk objectives
+- Tasks moved across:
+  - Backlog → In Progress → In Review → Done
+- Scope revision formally documented after dataset suitability review
 
-## 📐 Key Credit Risk Concepts Implemented
-
-- Weight of Evidence (WOE)
-- Information Value (IV)
-- Logistic Regression (MLE)
-- Statistical significance (p-values)
-- ROC Curve
-- AUC / Gini
-- KS Statistic
-- Score scaling
-- Risk band segmentation
-- IFRS-9 staging logic (conceptual integration)
+This reflects governance-driven risk project execution.
 
 ---
 
-## 🚀 Future Enhancements
+# 🚀 Future Enhancements
 
-- Random Forest / XGBoost benchmarking
-- LGD and EAD modelling
-- Lifetime PD framework
-- Portfolio analytics dashboard
-- Streamlit scorecard deployment
+- XGBoost PD comparison
+- Bayesian PD modelling
+- Survival analysis (Cox PH)
+- LGD modelling using recovery datasets
+- EAD modelling using exposure datasets
+- Full IFRS-9 ECL production pipeline
 
 ---
 
-## 👤 About the Author
+# 📌 Project Status
+
+✅ EDA Completed  
+✅ Feature Engineering & WOE Completed  
+✅ PD Model Built & Validated  
+✅ PSI Monitoring Implemented  
+🔜 LGD & EAD Modelling (Future Dataset-Based Project)
+
+📅 Last Updated: February 2026
+
+---
+
+# 👤 About the Author
 
 **Amitabh Gogoi**  
-Manager – Credit Risk  
-11+ years of experience in retail banking credit analysis risk and portfolio analytics.
+Manager – Credit Analysis and Risk  
+IFRS-9 • Scorecards • Portfolio Analytics • Risk Governance  
 
----
-
-## 📌 Project Status
-
-✅ PD Model & Credit Scorecard Completed  
-🔄 IFRS-9 ECL Expansion In Progress  
-📅 Last Updated: February 2026
+11+ years of banking risk experience.
