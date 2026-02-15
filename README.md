@@ -152,21 +152,21 @@ ECL = PD × LGD × EAD
 - GitHub (Version control & documentation)
 
 ---
+## 📁 Project Structure
 
-# 📁 Project Structure
-
+```
 Credit-Risk-Models/
 │
 ├── data/
 │   ├── raw/
-│   ├── processed/
+│   └── processed/
 │
 ├── notebooks/
 │   ├── 01_data_cleaning.ipynb
 │   ├── 02_eda.ipynb
 │   ├── 03_woe_binning.ipynb
 │   ├── 04_pd_model_logistic.ipynb
-│   ├── 05_psi_monitoring.ipynb
+│   └── 05_psi_monitoring.ipynb
 │
 ├── jira_screenshots/
 │
@@ -174,8 +174,8 @@ Credit-Risk-Models/
 ├── FSD.md
 ├── User_Stories.md
 └── README.md
+```
 
----
 
 # 🧭 Agile Workflow (Jira)
 
