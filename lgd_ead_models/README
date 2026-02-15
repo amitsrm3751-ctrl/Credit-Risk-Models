@@ -1,0 +1,16 @@
+# Credit Risk PD Modeling & Monitoring
+
+This project demonstrates the full lifecycle of Probability of Default (PD) model development, validation, scorecard construction, and model monitoring.
+
+## Project Scope
+
+- Data cleaning and preprocessing
+- Exploratory Data Analysis (EDA)
+- Weight of Evidence (WOE) transformation
+- Logistic regression modeling (sklearn & statsmodels)
+- Model validation (AUC, KS, Gini)
+- Score scaling and segmentation
+- Population Stability Index (PSI) for monitoring
+
+Note:
+Loss Given Default (LGD) and Exposure at Default (EAD) modeling require recovery and exposure-level datasets and will be developed in a separate project.
